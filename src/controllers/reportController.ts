@@ -26,22 +26,33 @@ export const balance = async ( req: Request, res: Response) => {
             return;
         }
 
-        const transactions = await prisma.transaction.findMany({
-            where: { customerId },
-            select: { amount: true, status: true}
-        });
+        const [depositAgg, withdrawAgg] = await Promise.all([
+            prisma.transaction.aggregate({
+                _sum: { amount: true },
+                where: {
+                customerId,
+                status: "Deposit",
+                },
+            }),
+            prisma.transaction.aggregate({
+                _sum: { amount: true },
+                where: {
+                customerId,
+                status: "Withdraw",
+                },
+            }),
+        ]);
 
-        //Count balance
-        const balance = transactions.reduce((total, tx) => {
-            return tx.status === "Deposit" ? total + tx.amount : total - tx.amount;
-        },0)
+        const totalDeposit = depositAgg._sum.amount ?? 0;
+        const totalWithdraw = withdrawAgg._sum.amount ?? 0;
+        const balance = totalDeposit - totalWithdraw;
 
-        res.status(201).json({ balance });
-    }
-    catch(err) {
-        res.status(500).json({ error: "Internal Server Error" })
+        res.status(200).json({ balance });
         return;
-    }
+        } catch (err) {
+            res.status(500).json({ error: "Internal Server Error" });
+            return;
+        }
 };
 
 //Get customer transaction based on date
