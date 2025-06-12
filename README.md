@@ -22,3 +22,7 @@ Aplikasi backend sistem yang sederhana untuk melakukan aktifitas simpan pinjam y
 ## Dokumentasi API Postman
 
 Untuk dokumentasi API Postman dapat dilihat [disini](https://documenter.getpostman.com/view/19458772/2sB2x5JtC7)
+
+## Jawaban soal tambahan
+
+Link docs dapat dilihat [disini](https://docs.google.com/document/d/1GITbmaWjAZrU0h7FXRckXG3G_vYGDiKeQo_BNRK4ieo/edit?usp=sharing)
