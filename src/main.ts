@@ -1,9 +1,10 @@
 import express from 'express';
 import config from './configs/config';
-import userRoute from '../src/routes/userRoutes';
-import customerRoute from '../src/routes/customerRoutes';
-import transactionRoute from '../src/routes/transactionRoutes';
-import reportRoute from '../src/routes/reportRoutes';
+import userRoute from './routes/userRoutes';
+import customerRoute from './routes/customerRoutes';
+import transactionRoute from './routes/transactionRoutes';
+import reportRoute from './routes/reportRoutes';
+import dashboardRoute from './routes/dashboardRoutes';
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(customerRoute);
 app.use(transactionRoute);
 //Report routes
 app.use(reportRoute);
+//Dashboard routes
+app.use(dashboardRoute);
 
 app.listen(config.port, () => {
     console.log(`Server is running on port ${config.port}`)

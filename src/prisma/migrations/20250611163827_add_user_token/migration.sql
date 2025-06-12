@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `user` ADD COLUMN `rememberToken` VARCHAR(191) NULL;
+ALTER TABLE `User` ADD COLUMN `rememberToken` VARCHAR(191) NULL;
